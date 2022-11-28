@@ -1,3 +1,5 @@
+
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -6,8 +8,7 @@ import java.util.HashMap;
 
 public class MonthlyReport {
     public HashMap<String, MonthlyReporterMonth> monthsData = new HashMap<>();
-
-    public MonthlyReport (String path) {
+    void readMonthly(String path) {
 
         String content = readFileContentsOrNull(path);
         String[] lines = content.split("\r?\n");
@@ -32,6 +33,7 @@ public class MonthlyReport {
             }
 
         }
+
     }
     private String readFileContentsOrNull(String path)
     {
@@ -41,6 +43,11 @@ public class MonthlyReport {
             System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно, файл не находится в нужной директории.");
             return null;
         }
+    }
+
+    public void all() {
+        expensesProduct();
+        profitableProduct();
     }
 
     void profitableProduct() {
@@ -91,4 +98,3 @@ public class MonthlyReport {
 
 
 }
-

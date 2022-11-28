@@ -8,7 +8,8 @@ public class YearlyReport {
     public HashMap<Integer, YearlyReportMonth> monthsData = new HashMap<>();
     int allMonth = 3;
 
-    public YearlyReport(String path) {
+    void readYearlyReport(String path) {
+
         this.year = year;
 
         String content = readFileContentsOrNull(path);
