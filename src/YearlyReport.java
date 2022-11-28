@@ -4,13 +4,13 @@ import java.nio.file.Path;
 import java.util.HashMap;
 
 public class YearlyReport {
-    public int year;
+    String[] month = new String[] {"январе", "феврале", "марте"};
     public HashMap<Integer, YearlyReportMonth> monthsData = new HashMap<>();
     int allMonth = 3;
 
     void readYearlyReport(String path) {
 
-        this.year = year;
+
 
         String content = readFileContentsOrNull(path);
         String[] lines = content.split("\r?\n");
@@ -45,57 +45,54 @@ public class YearlyReport {
     }
     void printingTheAnnualReport () {
         System.out.println("Отчет за 2021 год");
-        for (Integer monthNumber : monthsData.keySet()) {
-            System.out.println("Прибыль в " + monthNumber + " месяце = " + sumProfit());
+        for (int j = 0; j < month.length; j++) {
+            System.out.println("Прибыль в " + month[j] + " = " + sumProfit(j));
         }
-        System.out.println("Средний доход за месяц в этом году " + allSumProfit());
-        System.out.println("Средний расход за месяц в этом году " + allSumExpense());
+        System.out.println("Средний доход в этом году " + allSumProfit());
+        System.out.println("Средний расход в этом году " + allSumExpense());
 
     }
 
 
-    int sumProfit() {
+    int sumProfit(int i) {
         int profit = 0;
-        for (Integer monthNumber : monthsData.keySet()) {
-            YearlyReportMonth oneMonth = monthsData.get(monthNumber);
-            profit = oneMonth.income - oneMonth.expenses;
-        }
-        return profit;
-    }
-
-    int allSumProfit() {
-        int allProfit = 0;
-        for (YearlyReportMonth oneMonthData : monthsData.values()){
-            allProfit += oneMonthData.income;
-        }
-        return allProfit / allMonth;
-    }
-
-    int allSumExpense() {
-        int allExpense = 0;
-        for (YearlyReportMonth oneMonthData : monthsData.values()){
-            allExpense += oneMonthData.expenses;
-        }
-        return allExpense / allMonth;
-    }
-
-    int reconciliationOfIncomeMonth(int i) {
-        int income = 0;
         YearlyReportMonth oneMonthData = monthsData.get(i + 1);
-        income = oneMonthData.income;
-        return income;
+        profit = oneMonthData.income - oneMonthData.expenses;
+            return profit;
+        }
+
+        int allSumProfit () {
+            int allProfit = 0;
+            for (YearlyReportMonth oneMonthData : monthsData.values()) {
+                allProfit += oneMonthData.income;
+            }
+            return allProfit / allMonth;
+        }
+
+        int allSumExpense () {
+            int allExpense = 0;
+            for (YearlyReportMonth oneMonthData : monthsData.values()) {
+                allExpense += oneMonthData.expenses;
+            }
+            return allExpense / allMonth;
+        }
+
+        int reconciliationOfIncomeMonth (int i){
+            int income = 0;
+            YearlyReportMonth oneMonthData = monthsData.get(i + 1);
+            income = oneMonthData.income;
+            return income;
+        }
+
+
+        int reconciliationOfExpensesMonth ( int i){
+            int exp = 0;
+            YearlyReportMonth oneMonthData = monthsData.get(i + 1);
+            exp = oneMonthData.expenses;
+            return exp;
+        }
+
     }
-
-
-
-    int reconciliationOfExpensesMonth(int i) {
-        int exp = 0;
-        YearlyReportMonth oneMonthData = monthsData.get(i + 1);
-        exp = oneMonthData.expenses;
-        return exp;
-    }
-
-}
 
 
 

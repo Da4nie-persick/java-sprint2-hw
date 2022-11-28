@@ -11,6 +11,8 @@ public class Main {
 
         MonthlyReport[] monthlyReport = new MonthlyReport[3];
 
+        String[] month = new String[] {"январь", "февраль", "март"};
+
         boolean m = false;
         boolean y = false;
 
@@ -24,7 +26,7 @@ public class Main {
                 for (int i = 0; i < monthlyReport.length; i++) {
                     monthlyReport[i] = new MonthlyReport();
                     monthlyReport[i].readMonthly("resources/m.20210" + (i + 1) + ".csv");
-                    System.out.println("Считан месячный отчет " + (i + 1));
+                    System.out.println("Считан отчет за " + (month[i]));
                 }
                 m = true;
 
@@ -39,14 +41,14 @@ public class Main {
                     for (int i = 0; i < monthlyReport.length; i++) {
                         if (!monthlyReport[i].monthsData.isEmpty() && !yearlyReport.monthsData.isEmpty()) {
                             if (monthlyReport[i].reconciliationOfIncome() == yearlyReport.reconciliationOfIncomeMonth(i)) {
-                                System.out.println("Доход по месяцу " + (i + 1) + " совпадает");
+                                System.out.println("Доход за " + (month[i]) + " совпадает");
                             } else {
-                                System.out.println("Доход по месяцу " + (i + 1) + " НЕ совпадает");
+                                System.out.println("Доход за " + (month[i]) + " НЕ совпадает");
                             }
                             if (monthlyReport[i].reconciliationOfExpenses() == yearlyReport.reconciliationOfExpensesMonth(i)) {
-                                System.out.println("Расходы по месяцу " + (i + 1) + " совпадают");
+                                System.out.println("Расходы за " + (month[i]) + " совпадают");
                             } else {
-                                System.out.println("Расходы по месяцу " + (i + 1) + " НЕ совпадают");
+                                System.out.println("Расходы за " + (month[i]) + " НЕ совпадают");
                             }
                         }
                     }
@@ -56,7 +58,7 @@ public class Main {
             } else if (userInput == 4) {
                 if (m) {
                     for (int j = 0; j < monthlyReport.length; j++) {
-                        System.out.println("Статистика за " + (j + 1) + " месяц");
+                        System.out.println("Статистика за " + (month[j]));
                         monthlyReport[j].all();
                     }
                 } else {
